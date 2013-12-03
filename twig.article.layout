@@ -1,0 +1,77 @@
+#% Do not delete the line below; configure depends on this
+#  \DeclareLaTeXClass[article]{Twig template (article)}
+# Twig template.
+# Author : Josef Kufner <jk@frozen-doe.net>
+
+# Replace this with whatever you want
+# Don't forget to update [article] above.
+Input article.layout
+
+
+# Or you can simply copy everything below this line to 'Local layout'
+#---------------------------------------------------------------------
+
+InsetLayout Flex:Twig
+LabelString	Twig
+LyxType	custom
+LatexType	command
+LatexName	Twig
+Decoration	Conglomerate
+Spellcheck	0
+PassThru	1
+ForceLTR	1
+ForcePlain	1
+FreeSpacing	1
+KeepEmpty	0
+NeedProtect	0
+Font
+  Family	Typewriter
+  Color	special
+EndFont
+Preamble
+\def\Twig#1{\{\{\expandafter\string#1\}\}}
+EndPreamble
+End
+
+InsetLayout Flex:TwigBlock
+LabelString	TwigBlock
+LyxType	custom
+LatexType	command
+LatexName	TwigBlock
+Decoration	Conglomerate
+Spellcheck	0
+PassThru	1
+ForceLTR	1
+ForcePlain	1
+FreeSpacing	1
+KeepEmpty	0
+NeedProtect	1
+Font
+  Family	Typewriter
+  Color	indexlabel
+EndFont
+Preamble
+%\def\TwigBlock#1{\{\% \expandafter\string#1 \%\}}
+\def\TwigBlock#1{}
+EndPreamble
+End
+
+Style TwigBlock
+LabelString	TwigBlock
+LatexType	command
+LatexName	relax%\protect\TwigBlock
+BottomSep	0.3
+TopSep	0.3
+Spellcheck	0
+PassThru	1
+FreeSpacing	1
+KeepEmpty	0
+NeedProtect	0
+Align	left
+AlignPossible	left
+Font
+  Family	Typewriter
+  Color	indexlabel
+EndFont
+End
+

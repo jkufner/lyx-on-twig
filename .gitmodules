@@ -1,0 +1,6 @@
+[submodule "Twig"]
+	path = Twig
+	url = git@github.com:fabpot/Twig.git
+[submodule "Twig-extensions"]
+	path = Twig-extensions
+	url = git@github.com:fabpot/Twig-extensions.git
