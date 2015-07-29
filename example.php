@@ -29,11 +29,13 @@
  * SUCH DAMAGE.
  */
 
-include('Twig/lib/Twig/Autoloader.php');
-Twig_Autoloader::register();
+require dirname(__FILE__).'/vendor/autoload.php';
 
-include('Twig-extensions/lib/Twig/Extensions/Autoloader.php');
-Twig_Extensions_Autoloader::register();
+//include('Twig/lib/Twig/Autoloader.php');
+//Twig_Autoloader::register();
+
+//include('Twig-extensions/lib/Twig/Extensions/Autoloader.php');
+//Twig_Extensions_Autoloader::register();
 
 
 /**
@@ -67,7 +69,7 @@ $twig = new Twig_Environment($loader, array(
 	'autoescape' => 'tex',
 //	'cache' => './cache',
 ));
-$twig->addExtension(new Twig_Extensions_Extension_I18n());
+//$twig->addExtension(new Twig_Extensions_Extension_I18n());
 $lexer = new Twig_Lexer($twig, array(
 		'tag_comment'   => array('%%{', '%%}'),
 		'tag_block'     => array('\protect\TwigBlock{', '}'),
