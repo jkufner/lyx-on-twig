@@ -7,7 +7,14 @@ Twig constructs, this template is compiled to LaTeX source code with Twig
 constructs, and finally LaTeX template is populated with data, replacing Twig
 constructs in the process.
 
+Example
+-------
+
+While editing in LyX:
+
 ![screenshot](lyx-twig-template.png)
+
+Preview PDF generated directly from LyX (left) and final document (right):
 
 ![document](example.pdf.png)
 
@@ -28,8 +35,8 @@ Requirements
     on server.
 
 
-Usage Example
--------------
+Usage
+-----
 
   1. Create LyX document using `lyx/twig.article.layout` as a layout file. You may want to symlink this file next to your document.
   2. Use LyX to export tex template: `lyx -batch -e pdf5 template.twig.lyx`.
