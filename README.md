@@ -10,13 +10,15 @@ constructs in the process.
 Example
 -------
 
-While editing in LyX:
+| While editing in LyX:                   |
+|:---------------------------------------:|
+| ![screenshot](lyx-twig-template.png)    |
 
-![screenshot](lyx-twig-template.png)
+&nbsp;
 
-Preview PDF generated directly from LyX (left) and final document (right):
-
-![document](example.pdf.png)
+| Preview PDF generated directly from LyX (left) and final document (right): |
+|:--------------------------------------------------------------------------:|
+| ![document](example.pdf.png)                                               |
 
 
 Features
