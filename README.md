@@ -7,6 +7,10 @@ Twig constructs, this template is compiled to LaTeX source code with Twig
 constructs, and finally LaTeX template is populated with data, replacing Twig
 constructs in the process.
 
+![screenshot](lyx-twig-template.png)
+
+![document](example.pdf.png)
+
 
 Features
 --------
@@ -14,8 +18,6 @@ Features
   - Use LyX, a graphical WYSIWYM editor, to create template.
   - Use Twig to populate the template with data.
   - Everything in simple and easy-to-use package.
-
-![screenshot](lyx-twig-template.png)
 
 Requirements
 ------------

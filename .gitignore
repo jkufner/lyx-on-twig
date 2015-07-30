@@ -2,3 +2,9 @@
 composer.lock
 *.aux
 *.log
+
+example/example.pdf
+example/example.twig.pdf
+example/example.twig.tex
+example/howto.pdf
+
