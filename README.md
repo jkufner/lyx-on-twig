@@ -15,6 +15,7 @@ Features
   - Use Twig to populate the template with data.
   - Everything in simple and easy-to-use package.
 
+![screenshot](lyx-twig-template.png)
 
 Requirements
 ------------
@@ -53,4 +54,3 @@ Contribution guidelines
 
 If you wish to send me a patch, please create a Git pull request or send a Git
 formatted patch via email.
-
