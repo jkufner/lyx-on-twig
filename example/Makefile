@@ -1,10 +1,7 @@
 all: example.pdf example.twig.pdf howto.pdf
 
-example.pdf: example.tex
-	lualatex --interaction=batchmode --halt-on-error example.tex
-	
-example.tex: example.twig.tex example.php
-	./example.php > example.tex
+example.pdf: example.twig.tex example.php
+	./example.php
 
 example.twig.tex: example.twig.lyx
 	lyx -batch -e luatex example.twig.lyx

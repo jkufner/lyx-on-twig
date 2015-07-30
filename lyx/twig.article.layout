@@ -1,7 +1,7 @@
 #% Do not delete the line below; configure depends on this
 #  \DeclareLaTeXClass[article]{Twig template (article)}
 # Twig template.
-# Author : Josef Kufner <jk@frozen-doe.net>
+# Author : Josef Kufner <josef@kufner.cz>
 
 # Replace this with whatever you want
 # Don't forget to update [article] above.

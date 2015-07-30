@@ -29,63 +29,25 @@
  * SUCH DAMAGE.
  */
 
-require dirname(__FILE__).'/vendor/autoload.php';
+/* Use exceptions instead of errors */
+set_error_handler(function ($errno, $errstr, $errfile, $errline ) {
+	if (error_reporting()) {
+		throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+	}
+});
 
-//include('Twig/lib/Twig/Autoloader.php');
-//Twig_Autoloader::register();
 
-//include('Twig-extensions/lib/Twig/Extensions/Autoloader.php');
-//Twig_Extensions_Autoloader::register();
-
-
-/**
- * Escape special chars for LaTeX code (just like htmlspecialchars).
- */
-function latexspecialchars($string)
-{
-	return '{'.preg_replace_callback("/[\^\%~\\\\#\$%&_\{\}]/", function($token) {
-			switch($token[0]) {
-				case  '{': return '\{';
-				case  '}': return '\}';
-				case  '&': return '\&';
-				case  '%': return '\%';
-				case  '$': return '\$';
-				case  '_': return '\_';
-				case  '#': return '\#';
-				case  '^': return '\textasciicircum{}';
-				case  '~': return '\textasciitilde{}';
-				case '\\': return '\textbackslash{}';
-				default: throw new \InvalidArgumentException('This should never happen. $token = '.var_export($token, true));
-			}
-		}, $string).'}';
-}
-
+require dirname(dirname(__FILE__)).'/vendor/autoload.php';
 
 /*
  * Twig initialization
  */
-$loader = new Twig_Loader_Filesystem('./');
-$twig = new Twig_Environment($loader, array(
-	'autoescape' => 'tex',
-//	'cache' => './cache',
-));
-//$twig->addExtension(new Twig_Extensions_Extension_I18n());
-$lexer = new Twig_Lexer($twig, array(
-		'tag_comment'   => array('%%{', '%%}'),
-		'tag_block'     => array('\protect\TwigBlock{', '}'),
-		'tag_variable'  => array('\Twig{', '}'),
-		'interpolation' => array('#[', ']'),	// cannot use {} inside of Twig block and variable
-	));
-$twig->setLexer($lexer);
-$twig->getExtension('core')->setEscaper('tex', function(Twig_Environment $env, $string, $strategy = 'tex', $charset = null, $autoescape = false) {
-		return latexspecialchars($string);
-	});
-
+$lyxtwig = new LyxOnTwig\LyxOnTwig('./');
 
 /*
  * Render template
  */
-echo $twig->render('example.twig.tex',
+echo $lyxtwig->renderPdf('example.twig.tex', 'example.pdf',
 	array('items' => array_map(function($x) { $x['y'] = ($x['a'] * $x['a'] + $x['b'] * $x['b']) / $x['c']; return $x; }, array(
 		'first' => array(
 			'label' => 'First label',
@@ -110,5 +72,4 @@ echo $twig->render('example.twig.tex',
 			'c' => 25,
 		),
 	))));
-echo "\n\n";
 

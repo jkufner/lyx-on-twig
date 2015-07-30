@@ -8,6 +8,11 @@
             "email": "josef@kufner.cz"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "LyxOnTwig\\": "class/"
+        }
+    },
     "require": {
         "php": ">=5.3",
         "twig/twig": "^1.14"
