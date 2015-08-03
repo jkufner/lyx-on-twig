@@ -25,6 +25,7 @@ class LyxOnTwig {
 	protected $lexer;
 
 	public $luatex_command = 'lualatex --interaction=batchmode --halt-on-error --output-format=pdf --output-directory=%s %s';
+	public $run_count = 2;	// Run lualatex twice so references are correct
 
 	/**
 	 * Initialize Twig
@@ -81,11 +82,14 @@ class LyxOnTwig {
 
 		// Run luatex
 		$cmd = sprintf($this->luatex_command, escapeshellarg($temp_dir), escapeshellarg($tex_file));
-		echo "# $cmd\n";
-		exec($cmd, $out, $ret);
+		$ret = 0;
+		for ($run = 0; $ret == 0 && $run < $this->run_count; $run++) {
+			echo "# $cmd\n";
+			exec($cmd, $out, $ret);
+			echo "\t", join("\n\t", $out), "\n";
+		}
 
-		echo "\t", join("\n\t", $out), "\n";
-		if ($ret == 0) {
+		if ($ret == 0 && $run == $this->run_count) {
 			rename($pdf_file, $target_pdf_filename);
 		} else {
 			@unlink($pdf_file);
