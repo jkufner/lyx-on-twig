@@ -75,8 +75,6 @@ class LyxOnTwig {
 		$base_filename = $temp_dir.'/'.basename($template_filename);
 		$tex_file = $base_filename.'.tex';
 		$pdf_file = $base_filename.'.pdf';
-		$aux_file = $base_filename.'.aux';
-		$log_file = $base_filename.'.log';
 
 		// Render TeX to string
 		$this->renderTex($template_filename, $tex_file, $data);
@@ -92,9 +90,14 @@ class LyxOnTwig {
 		} else {
 			@unlink($pdf_file);
 		}
-		unlink($tex_file);
-		unlink($aux_file);
-		unlink($log_file);
+
+		// Clean up
+		foreach (scandir($temp_dir) as $f) {
+			$fn = $temp_dir.'/'.$f;
+			if ($f != '.' && $f != '..' && is_file($fn)) {
+				unlink($fn);
+			}
+		}
 		rmdir($temp_dir);
 
 		return ($ret == 0);
