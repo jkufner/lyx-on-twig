@@ -29,7 +29,24 @@ Font
   Color	special
 EndFont
 Preamble
-\def\Twig#1{\{\{\expandafter\string#1\}\}}
+  %\def\Twig#1{\{\{\expandafter\string#1\}\}}
+  % Thanks to http://tex.stackexchange.com/a/146066
+  \begingroup
+  \catcode`_=\active
+  \gdef\activate@Twig{%
+    \let_\textunderscore
+    \catcode`\_=\active
+  }
+  \endgroup
+  \newcommand{\Twig}{%
+    \begingroup
+    \activate@Twig
+    \@Twig
+  }
+  \newcommand{\@Twig}[1]{%
+     \{\{#1\}\}%
+      \endgroup
+  }
 EndPreamble
 End
 
