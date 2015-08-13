@@ -52,9 +52,9 @@ End
 
 InsetLayout Flex:TwigBlock
 LabelString	TwigBlock
-LyxType	custom
+LyxType		custom
 LatexType	command
-LatexName	TwigBlock
+LatexName	relax\protect\TwigBlock
 Decoration	Conglomerate
 Spellcheck	0
 PassThru	1
@@ -69,14 +69,14 @@ Font
 EndFont
 Preamble
 %\def\TwigBlock#1{\{\% \expandafter\string#1 \%\}}
-\def\TwigBlock#1{}
+\providecommand{\TwigBlock}[1]{}
 EndPreamble
 End
 
 Style TwigBlock
 LabelString	TwigBlock
 LatexType	command
-LatexName	relax%\protect\TwigBlock
+LatexName	relax\protect\TwigBlock
 BottomSep	0.3
 TopSep	0.3
 Spellcheck	0
@@ -90,5 +90,9 @@ Font
   Family	Typewriter
   Color	indexlabel
 EndFont
+Preamble
+%\def\TwigBlock#1{\{\% \expandafter\string#1 \%\}}
+\providecommand{\TwigBlock}[1]{}
+EndPreamble
 End
 

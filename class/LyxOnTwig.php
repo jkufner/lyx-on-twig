@@ -93,6 +93,7 @@ class LyxOnTwig {
 			rename($pdf_file, $target_pdf_filename);
 		} else {
 			@unlink($pdf_file);
+			throw new \Exception('Failed to generate LaTeX document: '.$pdf_file);
 		}
 
 		// Clean up

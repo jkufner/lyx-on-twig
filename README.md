@@ -52,6 +52,14 @@ Usage
       }
       ```
 
+PDF Properties
+--------------
+
+Fortunately LyX does not escape PDF options (in document settings, PDF
+properties), so it is possible to use `\noexpand\Twig{expression}` to insert
+`expression` into PDF title or any other field. The `\noexpand` is required to
+stop LaTeX from expanding the `\Twig` macro which is not defined yet.
+
 
 License
 -------
