@@ -23,8 +23,9 @@ class LyxOnTwig {
 	protected $loader;
 	protected $twig;
 	protected $lexer;
+	protected $template_path;
 
-	public $luatex_command = 'lualatex --interaction=batchmode --halt-on-error --output-format=pdf --output-directory=%s %s';
+	public $luatex_command = 'cd %s && lualatex --interaction=batchmode --halt-on-error --output-format=pdf --output-directory=%s %s';
 	public $run_count = 2;	// Run lualatex twice so references are correct
 
 	/**
@@ -39,6 +40,7 @@ class LyxOnTwig {
 	{
 		$config['autoescape'] = 'tex';
 
+		$this->template_path = $template_path;
 		$this->loader = new \Twig_Loader_Filesystem($template_path);
 		$this->twig = new \Twig_Environment($this->loader, $config);
 
@@ -67,7 +69,7 @@ class LyxOnTwig {
 	/**
 	 * Render template to PDF file (via invoking lualatex, intermediate tex code is stored in temporary file)
 	 */
-	public function renderPdf($template_filename, $target_pdf_filename, $data)
+	public function renderPdf($template_filename, $target_pdf_filename, $data, & $cmd_output = null)
 	{
 		$temp_dir = tempnam(sys_get_temp_dir(), 'LyxOnTwig.');
 		unlink($temp_dir);
@@ -80,13 +82,14 @@ class LyxOnTwig {
 		// Render TeX to string
 		$this->renderTex($template_filename, $tex_file, $data);
 
+		$template_dir = dirname(realpath($this->template_path.'/'.$template_filename));
+
 		// Run luatex
-		$cmd = sprintf($this->luatex_command, escapeshellarg($temp_dir), escapeshellarg($tex_file));
+		$cmd = sprintf($this->luatex_command, escapeshellarg($template_dir), escapeshellarg(realpath($temp_dir)), escapeshellarg(realpath($tex_file)));
 		$ret = 0;
 		for ($run = 0; $ret == 0 && $run < $this->run_count; $run++) {
-			echo "# $cmd\n";
 			exec($cmd, $out, $ret);
-			echo "\t", join("\n\t", $out), "\n";
+			$cmd_output = "# " . $cmd . "\n\t" . join("\n\t", $out) . "\n";
 		}
 
 		if ($ret == 0 && $run == $this->run_count) {
