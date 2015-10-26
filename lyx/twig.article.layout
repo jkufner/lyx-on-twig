@@ -15,7 +15,7 @@ InsetLayout Flex:Twig
 LabelString	Twig
 LyxType	custom
 LatexType	command
-LatexName	Twig
+LatexName	relax{}\Twig
 Decoration	Conglomerate
 Spellcheck	0
 PassThru	1
