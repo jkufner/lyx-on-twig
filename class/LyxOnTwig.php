@@ -127,7 +127,7 @@ class LyxOnTwig {
 	 */
 	final public static function latexspecialchars($string)
 	{
-		return '{'.preg_replace_callback("/[\^\%~\\\\#\$%&_\{\}]/", function($token) {
+		return preg_replace_callback("/[\^\%~\\\\#\$%&_\{\}]/", function($token) {
 				switch($token[0]) {
 					case  '{': return '\{';
 					case  '}': return '\}';
@@ -141,7 +141,7 @@ class LyxOnTwig {
 					case '\\': return '\textbackslash{}';
 					default: throw new \InvalidArgumentException('This should never happen. $token = '.var_export($token, true));
 				}
-			}, $string).'}';
+			}, $string);
 	}
 
 };
