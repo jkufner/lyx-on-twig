@@ -1,5 +1,5 @@
 {
-    "name": "cascade/lyx-on-twig",
+    "name": "josef.kufner.cz/lyx-on-twig",
     "description": "Simple PHP library combining LyX and Twig to create beautiful generated documents in LaTeX.",
     "license": "Apache-2.0",
     "authors": [
